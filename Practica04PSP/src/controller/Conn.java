@@ -21,6 +21,9 @@ public class Conn {
         //Previamente he creado la base de datos "psp04" desde DBeaver ya que si no me decía que no existía
         //Establecemos la conexion conn MySQL desde XAMPP y creamos la base de datos conn una conexión a MySQL desde DBeaver
 
+
+        //En el paquete libs está el jdbc utilizado, debemos darle click derecho y Add as Library...
+
         try {
             conn = DriverManager.getConnection(host + bd, user, pass);
             //Si la conexion es exitosa avisamos al usuario
