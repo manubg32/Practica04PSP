@@ -25,6 +25,7 @@ public class Conn {
         //En el paquete libs está el jdbc utilizado, debemos darle click derecho y Add as Library...
 
         try {
+
             conn = DriverManager.getConnection(host + bd, user, pass);
             //Si la conexion es exitosa avisamos al usuario
             System.out.println("Conexion exitosa");
