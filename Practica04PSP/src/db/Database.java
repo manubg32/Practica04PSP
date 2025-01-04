@@ -41,16 +41,16 @@ public class Database {
         }
     }
     public static ResultSet executeQuery(String sql) throws SQLException {
-        return (conn == null) ? null : conn.createStatement().executeQuery(sql);
+        return (conn == null) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeQuery(sql);
     }
     public static int executeIDU(String sql) throws SQLException {
-        return (conn == null) ? null : conn.createStatement().executeUpdate(sql);
+        return (conn == null) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeUpdate(sql);
     }
     public static boolean executeCreate(String sql) throws SQLException{
-        return (conn == null ) ? null : conn.createStatement().execute(sql);
+        return (conn == null ) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).execute(sql);
     }
     public static ResultSet executeSTQuery (String sql, Object...param) throws SQLException{
-        PreparedStatement pstmt = conn.prepareStatement(sql);
+        PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         int index = 1;
         for(Object o : param) {
             pstmt.setObject(index++, o);
@@ -58,7 +58,7 @@ public class Database {
         return pstmt.executeQuery();
     }
     public static int executeSTIDU(String sql, Object...param) throws SQLException{
-        PreparedStatement pstmt = conn.prepareStatement(sql);
+        PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         int index = 1 ;
         int filasAff=0;
         for(Object o : param) {
@@ -84,7 +84,7 @@ public class Database {
     }
     public static String[] getFieldNames(String tabla) throws SQLException{
         String sql = "SELECT * FROM "+tabla;
-        try(ResultSet rs = conn.createStatement().executeQuery(sql)){
+        try(ResultSet rs = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE).executeQuery(sql)){
             ResultSetMetaData rsmd = rs.getMetaData();
             int colCount = rsmd.getColumnCount();
             String[] fields = new String[colCount];
