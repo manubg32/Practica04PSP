@@ -12,7 +12,7 @@ public class Main {
 
 
     public static void main (String[]args){
-
+/*
         Connection bd = Conn.open();
 
         System.out.println("Realizamos las consultas");
@@ -26,6 +26,12 @@ public class Main {
             Database.closeConn();
         }catch(SQLException e){
             System.out.println(e);
+        }
+*/
+        try {
+            new FrmMenuPrincipal();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
