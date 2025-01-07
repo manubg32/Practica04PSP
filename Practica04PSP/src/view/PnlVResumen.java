@@ -22,8 +22,7 @@ import com.toedter.calendar.JCalendar;
 
 public class PnlVResumen extends JPanel {
 	
-	private Context context;
-	
+
 	private JLabel lblFoto;
 	private JLabel lblID;
 	private JLabel lblIdMostrado;

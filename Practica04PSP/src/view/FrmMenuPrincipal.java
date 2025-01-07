@@ -1,16 +1,11 @@
 package view;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.naming.Context;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class FrmMenuPrincipal extends JFrame {
@@ -25,6 +20,7 @@ public class FrmMenuPrincipal extends JFrame {
     private JMenuItem mniEntrar;
     private JMenuItem mniSalir;
     private JSeparator separator;
+    private JSeparator separator2;
     private JMenuItem mniAcercaDe;
     
     private PnlEntrar pnlEntrar = new PnlEntrar();
@@ -33,10 +29,13 @@ public class FrmMenuPrincipal extends JFrame {
     private PnlVDetalle pnlVDetalle = new PnlVDetalle();
     private PnlVResumen pnlVResumen = new PnlVResumen();
 
+    private ImageIcon imagen;
+    private JLabel lblImagen;
+
     public FrmMenuPrincipal() {
         setName("FrmMenuPrincipal");
-
-        setTitle("-Menú principal-");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(FrmMenuPrincipal.class.getResource("/icon.png")));
+        setTitle("I.E.S El Majuelo - Menú principal ");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 600, 400);
@@ -53,21 +52,34 @@ public class FrmMenuPrincipal extends JFrame {
 		
     	mniEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setContentPane(pnlEntrar);
+                setTitle("I.E.S El Majuelo - Login");
+                setContentPane(pnlEntrar);
 			}
 		});
     	
     	mniVDetalle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setContentPane(pnlVDetalle);
+				setTitle("I.E.S El Majuelo - Detalles");
+                setContentPane(pnlVDetalle);
 			}
 		});
     	
     	mniVResumen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setContentPane(pnlVResumen);
+				setTitle("I.E.S El Majuelo - Resumen");
+                setContentPane(pnlVResumen);
 			}
 		});
+
+        mniAcercaDe.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setTitle("I.E.S El Majuelo - Acerca de");
+                setContentPane(pnlAcercaDe);
+                revalidate();
+                repaint();
+            }
+        });
 		
 	}
 
@@ -114,9 +126,22 @@ public class FrmMenuPrincipal extends JFrame {
         mniAcercaDe.setHorizontalAlignment(SwingConstants.CENTER);
         menuBar.add(mniAcercaDe);
 
+        //Otro
+        separator2 = new JSeparator();
+        separator2.setOrientation(SwingConstants.VERTICAL);
+        menuBar.add(separator2);
+
         //Panel por defecto
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(0, 0));
+
+        //Imagen
+        Image tmp = new ImageIcon(FrmMenuPrincipal.class.getResource("/icon.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        ImageIcon logo = new ImageIcon(tmp);
+        JLabel lblLogo = new JLabel(logo);
+        contentPane.add(lblLogo, BorderLayout.CENTER);
 
 
     }
