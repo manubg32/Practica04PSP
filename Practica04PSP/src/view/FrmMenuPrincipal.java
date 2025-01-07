@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -16,6 +19,12 @@ public class FrmMenuPrincipal extends JFrame {
     private JMenuItem mniSalir;
     private JSeparator separator;
     private JMenuItem mniAcercaDe;
+    
+    private PnlEntrar pnlEntrar = new PnlEntrar();
+    private PnlSalir pnlSalir = new PnlSalir();
+    private PnlAcercaDe pnlAcercaDe = new PnlAcercaDe();
+    private PnlVDetalle pnlVDetalle = new PnlVDetalle();
+    private PnlVResumen pnlVResumen = new PnlVResumen();
 
     public FrmMenuPrincipal() {
         setName("FrmMenuPrincipal");
@@ -27,11 +36,29 @@ public class FrmMenuPrincipal extends JFrame {
         setLocationRelativeTo(null);
 
         initComponents();
+        
+        addListeners();
 
         setVisible(true);
     }
 
-    private void initComponents() {
+    private void addListeners() {
+		
+    	mniEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setContentPane(pnlEntrar);
+			}
+		});
+    	
+    	mniVDetalle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setContentPane(pnlVDetalle);
+			}
+		});
+		
+	}
+
+	private void initComponents() {
 
         //Barra de menu
         menuBar = new JMenuBar();
