@@ -3,7 +3,14 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.naming.Context;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class FrmMenuPrincipal extends JFrame {
@@ -53,6 +60,12 @@ public class FrmMenuPrincipal extends JFrame {
     	mniVDetalle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setContentPane(pnlVDetalle);
+			}
+		});
+    	
+    	mniVResumen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setContentPane(pnlVResumen);
 			}
 		});
 		
