@@ -43,7 +43,7 @@ public class PnlEntrar extends JPanel {
 	}
 
 	private void initComponents() {
-		lblEntrar = new JLabel("Entrar");
+		lblEntrar = new JLabel("Login");
 		lblEntrar.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblEntrar.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblEntrar);

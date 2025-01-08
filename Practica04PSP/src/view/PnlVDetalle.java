@@ -14,6 +14,8 @@ public class PnlVDetalle extends JPanel {
 	
 	private JPanel pnlDetalles;
 	private JPanel pnlBotones;
+	private JButton btnPrimero;
+	private JButton btnUltimo;
 	
 	public PnlVDetalle() {
 		setLayout(new BorderLayout(0, 0));
@@ -51,6 +53,9 @@ public class PnlVDetalle extends JPanel {
 		add(pnlBotones, BorderLayout.SOUTH);
 		pnlBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
+		btnPrimero = new JButton("Primero");
+		pnlBotones.add(btnPrimero);
+		
 		JButton btnAnterior = new JButton("Anterior");
 		pnlBotones.add(btnAnterior);
 		
@@ -59,5 +64,8 @@ public class PnlVDetalle extends JPanel {
 		
 		JButton btnSiguiente = new JButton("Siguiente");
 		pnlBotones.add(btnSiguiente);
+		
+		btnUltimo = new JButton("Último");
+		pnlBotones.add(btnUltimo);
 	}
 }

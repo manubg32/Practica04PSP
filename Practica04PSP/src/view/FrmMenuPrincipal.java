@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 public class FrmMenuPrincipal extends JFrame {
 
     private JPanel contentPane;
+    
+    private FrmMenuPrincipal context = this;
 
     private JMenuBar menuBar;
     private JMenu mnuVisualizar;
@@ -25,7 +27,6 @@ public class FrmMenuPrincipal extends JFrame {
     
     private PnlEntrar pnlEntrar = new PnlEntrar();
     private PnlSalir pnlSalir = new PnlSalir();
-    private PnlAcercaDe pnlAcercaDe = new PnlAcercaDe();
     private PnlVDetalle pnlVDetalle = new PnlVDetalle();
     private PnlVResumen pnlVResumen = new PnlVResumen();
 
@@ -54,6 +55,18 @@ public class FrmMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
                 setTitle("I.E.S El Majuelo - Login");
                 setContentPane(pnlEntrar);
+                revalidate();
+                repaint();
+			}
+		});
+    	
+    	mniSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO cortar la conexion e indicar al usuario que se ha desconectado
+                setTitle("I.E.S El Majuelo - Login");
+                setContentPane(pnlEntrar);
+                revalidate();
+                repaint();
 			}
 		});
     	
@@ -61,6 +74,8 @@ public class FrmMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setTitle("I.E.S El Majuelo - Detalles");
                 setContentPane(pnlVDetalle);
+                revalidate();
+                repaint();
 			}
 		});
     	
@@ -68,16 +83,27 @@ public class FrmMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setTitle("I.E.S El Majuelo - Resumen");
                 setContentPane(pnlVResumen);
+                revalidate();
+                repaint();
 			}
 		});
 
         mniAcercaDe.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setTitle("I.E.S El Majuelo - Acerca de");
-                setContentPane(pnlAcercaDe);
-                revalidate();
-                repaint();
+                JDialog dialog = new JDialog (context, "Acerca De", true);
+                dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+                
+                dialog.setUndecorated(true);
+                
+                PnlAcercaDe pnlAcercaDe = new PnlAcercaDe(dialog);
+                
+                dialog.getContentPane().add(pnlAcercaDe);
+                
+                dialog.setSize(600, 300);
+                dialog.setLocationRelativeTo(context);
+                
+                dialog.setVisible(true);
             }
         });
 		

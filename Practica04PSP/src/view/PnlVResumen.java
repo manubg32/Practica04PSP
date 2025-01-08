@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JCalendar;
+import javax.swing.JList;
 
 public class PnlVResumen extends JPanel {
 	
@@ -40,6 +41,7 @@ public class PnlVResumen extends JPanel {
 	private JPanel panel_2;
 	private JLabel lblNotaMediaMostrada;
 	private JButton btnNotaMedia;
+	private JList list;
 	
 	public PnlVResumen() {
 		setLayout(new BorderLayout(0, 0));
@@ -183,5 +185,8 @@ public class PnlVResumen extends JPanel {
 		
 		btnNotaMedia = new JButton("Calcular Nota Media");
 		panel_2.add(btnNotaMedia);
+		
+		list = new JList();
+		add(list, BorderLayout.EAST);
 	}
 }
