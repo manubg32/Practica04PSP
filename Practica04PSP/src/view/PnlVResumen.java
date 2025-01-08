@@ -133,7 +133,7 @@ public class PnlVResumen extends JPanel {
 	}
 
 	private void initComponents() {
-		String ruta = "user.png";
+		String ruta = "/user.png";
 		ImageIcon icon = new ImageIcon(ruta);
 		lblFoto = new JLabel(icon);
 		add(lblFoto, BorderLayout.WEST);

@@ -21,8 +21,16 @@ public class FrmMenuPrincipal extends JFrame {
     private JMenuItem mniVResumen;
     private JMenuItem mniEntrar;
     private JMenuItem mniSalir;
+
+    private JMenuItem mniInvisible;
+    private JMenuItem mniInvisible2;
+    private JMenuItem mniInvisible3;
+    private JMenuItem mniInvisible4;
+
     private JSeparator separator;
     private JSeparator separator2;
+    private JSeparator separator3;
+
     private JMenuItem mniAcercaDe;
     
     private PnlEntrar pnlEntrar = new PnlEntrar();
@@ -63,8 +71,9 @@ public class FrmMenuPrincipal extends JFrame {
     	mniSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO cortar la conexion e indicar al usuario que se ha desconectado
-                setTitle("I.E.S El Majuelo - Login");
-                setContentPane(pnlEntrar);
+                setTitle("I.E.S El Majuelo - Menu Principal");
+                setContentPane(pnlSalir);
+                JOptionPane.showMessageDialog(null, "Se ha cerrado la sesión.", "Cerrar Sesión", JOptionPane.INFORMATION_MESSAGE);
                 revalidate();
                 repaint();
 			}
@@ -128,6 +137,11 @@ public class FrmMenuPrincipal extends JFrame {
         mniSalir.setHorizontalAlignment(SwingConstants.CENTER);
         mnuValidar.add(mniSalir);
 
+        //Un separador para que quede mas bonito
+        separator = new JSeparator();
+        separator.setOrientation(SwingConstants.VERTICAL);
+        menuBar.add(separator);
+
         //Menu Visualizar
         mnuVisualizar = new JMenu("Visualizar");
         mnuVisualizar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -142,20 +156,37 @@ public class FrmMenuPrincipal extends JFrame {
         mnuVisualizar.add(mniVResumen);
 
 
-        //Un separador para que quede mas bonito
-        separator = new JSeparator();
-        separator.setOrientation(SwingConstants.VERTICAL);
-        menuBar.add(separator);
+        //Otro separador
+        separator2 = new JSeparator();
+        separator2.setOrientation(SwingConstants.VERTICAL);
+        menuBar.add(separator2);
 
         //Item menu acerca de
         mniAcercaDe = new JMenuItem("Acerca de");
         mniAcercaDe.setHorizontalAlignment(SwingConstants.CENTER);
         menuBar.add(mniAcercaDe);
 
-        //Otro
-        separator2 = new JSeparator();
-        separator2.setOrientation(SwingConstants.VERTICAL);
-        menuBar.add(separator2);
+        //Otro separador
+        separator3 = new JSeparator();
+        separator3.setOrientation(SwingConstants.VERTICAL);
+        menuBar.add(separator3);
+
+        //Menu item invisibles para hacer mas pequeño el acerca de
+        mniInvisible = new JMenuItem();
+        mniInvisible.setHorizontalAlignment(SwingConstants.CENTER);
+        menuBar.add(mniInvisible);
+
+        mniInvisible2 = new JMenuItem();
+        mniInvisible2.setHorizontalAlignment(SwingConstants.CENTER);
+        menuBar.add(mniInvisible2);
+
+        mniInvisible3 = new JMenuItem();
+        mniInvisible3.setHorizontalAlignment(SwingConstants.CENTER);
+        menuBar.add(mniInvisible3);
+
+        mniInvisible4 = new JMenuItem();
+        mniInvisible4.setHorizontalAlignment(SwingConstants.CENTER);
+        menuBar.add(mniInvisible4);
 
         //Panel por defecto
         contentPane = new JPanel();

@@ -1,5 +1,9 @@
 package db;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,4 +98,54 @@ public class Database {
             return fields;
         }
     }
+
+    // Metodo para añadir imagen
+    public static int setImage(String nombreImagen, FileInputStream fis, long length) throws SQLException {
+        String sql = "INSERT INTO imagenes (nombre, imagen) VALUES (?, ?)";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+            pstmt.setString(1, nombreImagen);  // Establecer el nombre de la imagen
+            pstmt.setBinaryStream(2, fis, length);  // Establecer el flujo de la imagen y su longitud
+
+            return pstmt.executeUpdate();  // Ejecutar la actualización (insertar)
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    // Metodo para obtener imagen
+    public static void getImage(int id, String outputPath) throws SQLException, IOException {
+        String sql = "SELECT imagen FROM imagenes WHERE id = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);  // Establecer el ID para recuperar la imagen
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    // Obtener el flujo de la imagen (BLOB)
+                    InputStream inputStream = rs.getBinaryStream("imagen");
+
+                    // Crear un archivo para guardar la imagen recuperada
+                    try (FileOutputStream fos = new FileOutputStream(outputPath)) {
+                        byte[] buffer = new byte[1024];
+                        int bytesRead;
+
+                        // Leer los bytes de la imagen y escribirlos en el archivo
+                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                            fos.write(buffer, 0, bytesRead);
+                        }
+                        System.out.println("Imagen recuperada correctamente");
+                    }
+                } else {
+                    System.out.println("No se encontró la imagen con el ID especificado.");
+                }
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+
 }
