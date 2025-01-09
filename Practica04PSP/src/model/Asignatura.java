@@ -2,6 +2,7 @@ package model;
 
 public class Asignatura
 {
+	public static int n = 0;
 
     private Integer cod;
     private String nombre;

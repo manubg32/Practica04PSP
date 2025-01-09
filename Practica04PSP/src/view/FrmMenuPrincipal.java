@@ -1,16 +1,33 @@
 package view;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class FrmMenuPrincipal extends JFrame {
 
-    private JPanel contentPane;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private JPanel contentPane;
     
     private FrmMenuPrincipal context = this;
 
@@ -32,14 +49,6 @@ public class FrmMenuPrincipal extends JFrame {
     private JSeparator separator3;
 
     private JMenuItem mniAcercaDe;
-    
-    private PnlEntrar pnlEntrar = new PnlEntrar();
-    private PnlSalir pnlSalir = new PnlSalir();
-    private PnlVDetalle pnlVDetalle = new PnlVDetalle();
-    private PnlVResumen pnlVResumen = new PnlVResumen();
-
-    private ImageIcon imagen;
-    private JLabel lblImagen;
 
     public FrmMenuPrincipal() {
         setName("FrmMenuPrincipal");
@@ -62,7 +71,11 @@ public class FrmMenuPrincipal extends JFrame {
     	mniEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 setTitle("I.E.S El Majuelo - Login");
-                setContentPane(pnlEntrar);
+                try {
+                	setContentPane(new PnlEntrar());
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al cargar el panel: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 revalidate();
                 repaint();
 			}
@@ -72,7 +85,7 @@ public class FrmMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//TODO cortar la conexion e indicar al usuario que se ha desconectado
                 setTitle("I.E.S El Majuelo - Menu Principal");
-                setContentPane(pnlSalir);
+                setContentPane(new PnlSalir());
                 JOptionPane.showMessageDialog(null, "Se ha cerrado la sesión.", "Cerrar Sesión", JOptionPane.INFORMATION_MESSAGE);
                 revalidate();
                 repaint();
@@ -82,7 +95,11 @@ public class FrmMenuPrincipal extends JFrame {
     	mniVDetalle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setTitle("I.E.S El Majuelo - Detalles");
-                setContentPane(pnlVDetalle);
+                try {
+                	setContentPane(new PnlVDetalle());
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al cargar el panel: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 revalidate();
                 repaint();
 			}
@@ -91,7 +108,7 @@ public class FrmMenuPrincipal extends JFrame {
     	mniVResumen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setTitle("I.E.S El Majuelo - Resumen");
-                setContentPane(pnlVResumen);
+                setContentPane(new PnlVResumen());
                 revalidate();
                 repaint();
 			}

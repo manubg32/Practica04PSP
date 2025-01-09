@@ -1,23 +1,43 @@
 package view;
 
-import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import controller.ControllerVDetalles;
 
 public class PnlVDetalle extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private ControllerVDetalles cv = new ControllerVDetalles();
 	
-	private JTextField txtNota;
+	public static JTextField txtNota;
 	
-	private JLabel lblAsignatura;
+	public static JLabel lblAsignatura;
 	
 	private JPanel pnlDetalles;
 	private JPanel pnlBotones;
 	private JButton btnPrimero;
 	private JButton btnUltimo;
+	private JButton btnSiguiente;
+	private JButton btnAnterior;
+	private JButton btnGuardar;
 	
-	public PnlVDetalle() {
+	public PnlVDetalle() throws SQLException {
 		setLayout(new BorderLayout(0, 0));
 		
 		//Inicializamos los componentes
@@ -25,10 +45,48 @@ public class PnlVDetalle extends JPanel {
 		
 		//Damos funcionalidad
 		addListeners();
+		
+		//Mostramos el primer elemento
+		cv.mostrarPrimero();
 	}
 
+	
+
 	private void addListeners() {
+		//Damos funcionalidad al btnPrimero
+		btnPrimero.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cv.mostrarPrimero();
+			}
+		});
 		
+		//Damos funcionalidad al btnUltimo
+		btnUltimo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cv.mostrarUltimo();
+			}
+		});
+		
+		//Damos funcionalidad al btnSiguiente
+		btnSiguiente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cv.mostrarSiguiente();
+			}
+		});
+		
+		//Damos funcionalidad al btnAnterior
+		btnAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cv.mostrarAnterior();
+			}
+		});
+		
+		//Damos funcionalidad al btnGuardar
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cv.guardarNota();
+			}
+		});
 	}
 
 	private void initComponents() {
@@ -54,15 +112,16 @@ public class PnlVDetalle extends JPanel {
 		pnlBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		btnPrimero = new JButton("Primero");
+		
 		pnlBotones.add(btnPrimero);
 		
-		JButton btnAnterior = new JButton("Anterior");
+		btnAnterior = new JButton("Anterior");
 		pnlBotones.add(btnAnterior);
 		
-		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton("Guardar");
 		pnlBotones.add(btnGuardar);
 		
-		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente = new JButton("Siguiente");
 		pnlBotones.add(btnSiguiente);
 		
 		btnUltimo = new JButton("Último");

@@ -1,16 +1,28 @@
 package view;
 
-import javax.swing.*;
-import java.awt.GridLayout;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.Rectangle;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import controller.Conn;
+import db.Database;
 
 public class PnlEntrar extends JPanel {
+	
+	public static String user;
+	public static Integer idAlumn; 
 	
 	private JTextField txtUsuario;
 	private JPasswordField txtPassword;
@@ -21,7 +33,7 @@ public class PnlEntrar extends JPanel {
 	
 	private JButton btnValidar;
 	
-	public PnlEntrar() {
+	public PnlEntrar() throws SQLException {
 		setLayout(new GridLayout(7, 1, 5, 5));
 		
 		//Inicializamos los componentes
@@ -34,9 +46,30 @@ public class PnlEntrar extends JPanel {
 
 	private void addListeners() {
 		//Agregamos funcionalidad al btnValidar
-				btnValidar.addActionListener(new ActionListener() {
+				btnValidar.addActionListener(new ActionListener()  {
 					public void actionPerformed(ActionEvent e) {
+						//TODO proceso de validacion
 						
+						//Hay que validar el usuario para evitar un SQLInjection
+						
+						//Tras validar al usuario y que sea correcto guardamos su usuario y numero en una variable global para realizar las consultas
+						user = txtUsuario.getText();
+						idAlumn = getAlumnNumber();
+						
+					}
+
+					//Método que devuelve el id del Alumno
+					private int getAlumnNumber() {
+						try {
+							Conn.open();
+							ResultSet rs = Database.executeQuery("SELECT numero FROM Alumno WHERE usuario = '" + user + "');");
+							return rs.getInt("numero");
+						} catch (SQLException e) {
+							JOptionPane.showMessageDialog(btnValidar, e.getMessage());
+							return 0;
+						} finally {
+							Conn.close();
+						}
 					}
 				});
 		
