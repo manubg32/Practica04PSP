@@ -4,6 +4,8 @@ import controller.Conn;
 import db.Database;
 
 import javax.xml.crypto.Data;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -11,7 +13,7 @@ public class Main {
 
 	static Connection conn = null;
 
-    public static void main (String[]args) {
+    public static void main (String[]args) throws IOException {
 
     	
     	
@@ -33,11 +35,11 @@ public class Main {
         }
     }
 
-    private static void insertarDatos() throws SQLException {
+    private static void insertarDatos() throws SQLException, IOException {
 		String datosAlumno1 = "INSERT INTO Alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
-							+ "VALUES (1, 'Antonio', 'password123', 2001-08-21, 9.8, );";
+							+ "VALUES (1, 'Antonio', 'password123', 2001/08/21, 9.8, " + Database.getImageBytes("iconAntonio.jpg") + ");";
 		String datosAlumno2 = "INSERT INTO Alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
-							+ "INSERT INTO Alumno(2, 'Manuel', 'contasena123', 2002-09-26, 8.76, );";
+							+ "INSERT INTO Alumno(2, 'Manuel', 'contasena123', 2002/09/26, 8.76, " + Database.getImageBytes("iconManuel.png") + ");";
 		
 		Database.executeIDU(datosAlumno1);
 		Database.executeIDU(datosAlumno2);
