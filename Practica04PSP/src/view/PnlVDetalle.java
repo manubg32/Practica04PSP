@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import controller.ControllerVDetalles;
+import controller.CtrlVDetalle;
 
 public class PnlVDetalle extends JPanel {
 
@@ -23,7 +23,7 @@ public class PnlVDetalle extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private ControllerVDetalles cd = new ControllerVDetalles();
+	private CtrlVDetalle cd = new CtrlVDetalle();
 	
 	public static JTextField txtNota;
 	
