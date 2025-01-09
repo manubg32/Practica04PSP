@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.swing.ImageIcon;
@@ -19,6 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JCalendar;
+import controller.CtrlVResumen;
+import model.Alumno;
+import model.Asignatura;
+
 import javax.swing.JList;
 
 public class PnlVResumen extends JPanel {
@@ -42,14 +47,17 @@ public class PnlVResumen extends JPanel {
 	private JLabel lblNotaMediaMostrada;
 	private JButton btnNotaMedia;
 	private JList list;
-	
+
+	private CtrlVResumen ctrlResumen;
+
 	public PnlVResumen() {
 		setLayout(new BorderLayout(0, 0));
 				
 		initComponents();
-		
 		addListeners();
 		
+		ctrlResumen.obtenerAlumno("SELECT * FROM alumno WHERE numero = ");
+		ctrlResumen.obtenerAsignaturas();
 	}
 
 	private void addListeners() {
@@ -188,5 +196,8 @@ public class PnlVResumen extends JPanel {
 		
 		list = new JList();
 		add(list, BorderLayout.EAST);
+
+		ctrlResumen = new CtrlVResumen();
 	}
+
 }

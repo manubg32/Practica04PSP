@@ -49,6 +49,10 @@ public class Conn {
     public static int executeIDU(String sql) throws SQLException {
         return (conn == null) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeUpdate(sql);
     }
+
+    public static ResultSet executeQuery(String sql) throws SQLException {
+        return (conn == null) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeQuery(sql);
+    }
     
 
 }
