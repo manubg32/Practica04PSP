@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -22,26 +23,26 @@ import controller.CtrlEntrar;
 import db.Database;
 
 public class PnlEntrar extends JPanel {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private CtrlEntrar ce = new CtrlEntrar();
-	
+
 	public static String user;
-	public static Integer idAlumn; 
-	
+	public static Integer idAlumn;
+
 	private JTextField txtUsuario;
 	private JPasswordField txtPassword;
-	
+
 	private JLabel lblEntrar;
 	private JLabel lblUsuario;
 	private JLabel lblPassword;
-	
+
 	private JButton btnValidar;
-	
+
 	public PnlEntrar() throws SQLException {
 		setLayout(new GridLayout(7, 1, 5, 5));
 		
@@ -66,34 +67,45 @@ public class PnlEntrar extends JPanel {
 					        //Activamos los botones
 					        FrmMenuPrincipal.activarBotones();
 					        //Tras validar al usuario y que sea correcto guardamos su usuario y numero en una variable global para realizar las consultas
-							//user = txtUsuario.getText();
-							//idAlumn = getAlumnNumber();
+							user = txtUsuario.getText();
+							try {
+								idAlumn = getAlumnNumber(user);
+							} catch (SQLException ignore) {}
 			                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 					    } else {
 					    	Arrays.fill(pass, '\0'); //Para eliminar la contraseña y no se guarde
 			                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
 					    }
-						
-						//Hay que validar el usuario para evitar un SQLInjection
-						
-						
-						
-					}
-
-					//Método que devuelve el id del Alumno
-					private int getAlumnNumber() {
-						try {
-							Conn.open();
-							ResultSet rs = Database.executeQuery("SELECT numero FROM Alumno WHERE usuario = '" + user + "');");
-							Conn.close();
-							return rs.getInt("numero");
-						} catch (SQLException e) {
-							JOptionPane.showMessageDialog(btnValidar, e.getMessage());
-							return 0;
-						}
 					}
 				});
-		
+	}
+
+	//Método que devuelve el id del Alumno
+	private int getAlumnNumber(String user) throws SQLException {
+	    int numero = 0; // Inicializar la variable que se devolverá
+	    try {
+	        // Abrir la conexión
+	        Conn.open();
+	        
+	        // Consulta parametrizada
+	        String consulta = "SELECT numero FROM Alumno WHERE usuario = ?";
+	        try (PreparedStatement stmt = Conn.open().prepareStatement(consulta)) {
+	            stmt.setString(1, user); // Sustituir el parámetro
+	            
+	            try (ResultSet rs = stmt.executeQuery()) {
+	                if (rs.next()) {
+	                    numero = rs.getInt("numero"); // Obtener el valor del campo "numero"
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        // Mostrar el error en un JOptionPane
+	        JOptionPane.showMessageDialog(null, "Error al obtener el número del alumno: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	    } finally {
+	        // Cerrar la conexión
+	        Conn.close();
+	    }
+	    return numero;
 	}
 
 	private void initComponents() {
@@ -128,4 +140,5 @@ public class PnlEntrar extends JPanel {
 		btnValidar = new JButton("Validar");
 		add(btnValidar);		
 	}
+	
 }
