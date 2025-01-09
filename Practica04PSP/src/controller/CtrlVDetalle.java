@@ -64,7 +64,7 @@ public class CtrlVDetalle {
             double nota = rs.getDouble("nota");
 
             // Creamos una instancia de Asignatura
-            Asignatura asignatura = new Asignatura(Asignatura.n++, nombre, nota, PnlEntrar.idAlumn);
+            Asignatura asignatura = new Asignatura(nombre, nota, PnlEntrar.idAlumn);
 
             // Agregamos la instancia a la lista
             asignaturas.add(asignatura);

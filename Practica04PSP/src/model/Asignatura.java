@@ -2,22 +2,22 @@ package model;
 
 public class Asignatura
 {
-	public static int n = 0;
+	private static int n = 0;
 
     private Integer cod;
     private String nombre;
     private Double nota;
     private Integer idAlumn; //FK Alumno
 
-    public Asignatura(Integer cod, String nombre, Double nota, Integer idAlumn) {
-        this.cod = cod;
+    public Asignatura(String nombre, Double nota, Integer idAlumn) {
+        this.cod = getCod();
         this.nombre = nombre;
         this.nota = nota;
         this.idAlumn = idAlumn;
     }
 
     public Integer getCod() {
-        return cod;
+        return n++;
     }
 
     public void setCod(Integer cod) {
