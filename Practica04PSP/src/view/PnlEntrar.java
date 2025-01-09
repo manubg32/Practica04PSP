@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -61,16 +62,21 @@ public class PnlEntrar extends JPanel {
 						char[] pass = txtPassword.getPassword();//La contraseña se coge en un array de caracteres de un JPasswordField
 						
 						if (ce.validarCredenciales(usuario, pass)) {
-					        System.out.println("Inicio de sesión exitoso");
+					        Arrays.fill(pass, '\0'); //Para eliminar la contraseña y no se guarde
+					        //Activamos los botones
+					        FrmMenuPrincipal.activarBotones();
+					        //Tras validar al usuario y que sea correcto guardamos su usuario y numero en una variable global para realizar las consultas
+							//user = txtUsuario.getText();
+							//idAlumn = getAlumnNumber();
+			                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 					    } else {
-					        System.out.println("Credenciales inválidas");
+					    	Arrays.fill(pass, '\0'); //Para eliminar la contraseña y no se guarde
+			                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
 					    }
 						
 						//Hay que validar el usuario para evitar un SQLInjection
 						
-						//Tras validar al usuario y que sea correcto guardamos su usuario y numero en una variable global para realizar las consultas
-						//user = txtUsuario.getText();
-						//idAlumn = getAlumnNumber();
+						
 						
 					}
 

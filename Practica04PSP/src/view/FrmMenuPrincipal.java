@@ -32,12 +32,12 @@ public class FrmMenuPrincipal extends JFrame {
     private FrmMenuPrincipal context = this;
 
     private JMenuBar menuBar;
-    private JMenu mnuVisualizar;
+    private static JMenu mnuVisualizar;
     private JMenu mnuValidar;
     private JMenuItem mniVDetalle;
     private JMenuItem mniVResumen;
     private JMenuItem mniEntrar;
-    private JMenuItem mniSalir;
+    private static JMenuItem mniSalir;
 
     private JMenuItem mniInvisible;
     private JMenuItem mniInvisible2;
@@ -151,6 +151,7 @@ public class FrmMenuPrincipal extends JFrame {
         mnuValidar.add(mniEntrar);
 
         mniSalir = new JMenuItem("Salir");
+        mniSalir.setEnabled(false);
         mniSalir.setHorizontalAlignment(SwingConstants.CENTER);
         mnuValidar.add(mniSalir);
 
@@ -161,6 +162,7 @@ public class FrmMenuPrincipal extends JFrame {
 
         //Menu Visualizar
         mnuVisualizar = new JMenu("Visualizar");
+        mnuVisualizar.setEnabled(false);
         mnuVisualizar.setHorizontalAlignment(SwingConstants.CENTER);
         menuBar.add(mnuVisualizar);
 
@@ -219,4 +221,11 @@ public class FrmMenuPrincipal extends JFrame {
 
 
     }
+
+	public static void activarBotones() {
+		mnuVisualizar.setEnabled(true);
+		mniSalir.setEnabled(true);
+	}
+
+	
 }
