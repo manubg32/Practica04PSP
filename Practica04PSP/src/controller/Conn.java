@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import db.Database;
@@ -44,5 +45,10 @@ public class Conn {
             conn.close();
         }
     }
+    
+    public static int executeIDU(String sql) throws SQLException {
+        return (conn == null) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeUpdate(sql);
+    }
+    
 
 }

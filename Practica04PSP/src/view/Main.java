@@ -36,13 +36,13 @@ public class Main {
     }
 
     private static void insertarDatos() throws SQLException, IOException {
-		String datosAlumno1 = "INSERT INTO Alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
+		String datosAlumno1 = "INSERT INTO alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
 							+ "VALUES (1, 'Antonio', 'password123', 2001/08/21, 9.8, " + Database.getImageBytes("iconAntonio.jpg") + ");";
-		String datosAlumno2 = "INSERT INTO Alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
-							+ "INSERT INTO Alumno(2, 'Manuel', 'contasena123', 2002/09/26, 8.76, " + Database.getImageBytes("iconManuel.png") + ");";
+		String datosAlumno2 = "INSERT INTO alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
+							+ "INSERT INTO alumno(2, 'Manuel', 'contasena123', 2002/09/26, 8.76, " + Database.getImageBytes("iconManuel.png") + ");";
 		
-		Database.executeIDU(datosAlumno1);
-		Database.executeIDU(datosAlumno2);
+		Conn.executeIDU(datosAlumno1);
+		Conn.executeIDU(datosAlumno2);
 		
 		String datosAsignatura1 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
 								+ "VALUES (1, 'Matemáticas', 7.6, 1);";	
@@ -61,14 +61,14 @@ public class Main {
 		String datosAsignatura8 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
 								+ "VALUES (8, 'Inglés', 10.0, 2);";
 		
-		Database.executeIDU(datosAsignatura1);
-		Database.executeIDU(datosAsignatura2);
-		Database.executeIDU(datosAsignatura3);
-		Database.executeIDU(datosAsignatura4);
-		Database.executeIDU(datosAsignatura5);
-		Database.executeIDU(datosAsignatura6);
-		Database.executeIDU(datosAsignatura7);
-		Database.executeIDU(datosAsignatura8);
+		Conn.executeIDU(datosAsignatura1);
+		Conn.executeIDU(datosAsignatura2);
+		Conn.executeIDU(datosAsignatura3);
+		Conn.executeIDU(datosAsignatura4);
+		Conn.executeIDU(datosAsignatura5);
+		Conn.executeIDU(datosAsignatura6);
+		Conn.executeIDU(datosAsignatura7);
+		Conn.executeIDU(datosAsignatura8);
 	}
 
 	//Este metodo es por si no tenemos tablas creadas las crea
