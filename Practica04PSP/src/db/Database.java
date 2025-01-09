@@ -4,6 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,50 +112,32 @@ public class Database {
     }
 
     // Metodo para añadir imagen
-    public static int setImage(String nombreImagen, FileInputStream fis, long length) throws SQLException {
-        String sql = "INSERT INTO imagenes (nombre, imagen) VALUES (?, ?)";
+    public static byte[] getImageBytes(String imagePath) throws IOException {
+        // Leer la imagen desde el archivo y convertirla en un array de bytes
+        Path path = Paths.get(imagePath);  // Ruta del archivo de la imagen
+        byte[] imageData = Files.readAllBytes(path);  // Leer todo el contenido del archivo
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
-            pstmt.setString(1, nombreImagen);  // Establecer el nombre de la imagen
-            pstmt.setBinaryStream(2, fis, length);  // Establecer el flujo de la imagen y su longitud
-
-            return pstmt.executeUpdate();  // Ejecutar la actualización (insertar)
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        }
+        // Devolver el array de bytes que contiene los datos de la imagen
+        return imageData;
     }
 
-    // Metodo para obtener imagen
-    public static void getImage(int id, String outputPath) throws SQLException, IOException {
-        String sql = "SELECT imagen FROM imagenes WHERE id = ?";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);  // Establecer el ID para recuperar la imagen
+    public static byte[] getImageBytes(int productId) throws SQLException, IOException {
 
-            try (ResultSet rs = pstmt.executeQuery()) {
+        String query = "SELECT imagen FROM alumno WHERE id = ?";  // La consulta SQL para obtener los datos de la imagen
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, productId);  // Establecer el ID del producto
+
+            // Ejecutar la consulta
+            try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    // Obtener el flujo de la imagen (BLOB)
-                    InputStream inputStream = rs.getBinaryStream("imagen");
-
-                    // Crear un archivo para guardar la imagen recuperada
-                    try (FileOutputStream fos = new FileOutputStream(outputPath)) {
-                        byte[] buffer = new byte[1024];
-                        int bytesRead;
-
-                        // Leer los bytes de la imagen y escribirlos en el archivo
-                        while ((bytesRead = inputStream.read(buffer)) != -1) {
-                            fos.write(buffer, 0, bytesRead);
-                        }
-                        System.out.println("Imagen recuperada correctamente");
-                    }
+                    // Obtener los datos binarios de la imagen (en un array de bytes)
+                    return rs.getBytes("image_data");
                 } else {
-                    System.out.println("No se encontró la imagen con el ID especificado.");
+                    System.out.println("No se encontró la imagen para el producto con ID: " + productId);
+                    return null;  // No se encontró la imagen para ese ID
                 }
             }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 
