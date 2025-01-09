@@ -55,8 +55,8 @@ public class PnlVResumen extends JPanel {
 				
 		initComponents();
 		addListeners();
-		
-		ctrlResumen.obtenerAlumno("SELECT * FROM alumno WHERE numero = ");
+
+		//ctrlResumen.obtenerAlumno("SELECT * FROM alumno WHERE numero = ?");
 		ctrlResumen.obtenerAsignaturas();
 	}
 

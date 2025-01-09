@@ -12,7 +12,7 @@ public class CtrlVResumen {
 
     }
 
-    public Alumno obtenerAlumno(String sql) throws SQLException {
+   /* public Alumno obtenerAlumno(String sql) throws SQLException {
         Conn.executeQuery(sql);
     }
     public List<Asignatura> obtenerAsignaturas(){
@@ -21,4 +21,6 @@ public class CtrlVResumen {
     public Double notaMedia(){
 
     }
+    */
+    
 }
