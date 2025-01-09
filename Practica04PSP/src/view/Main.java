@@ -20,6 +20,7 @@ public class Main {
         try{
             conn = Conn.open();
             crearTablas();
+            borrarDatos();
             insertarDatos();
             System.out.println("Creado con exito");
             Conn.close();
@@ -35,7 +36,15 @@ public class Main {
         }
     }
 
-    private static void insertarDatos() throws SQLException, IOException {
+    private static void borrarDatos() throws SQLException {
+		String borrarAlumnos = "DELETE FROM alumno WHERE numero in (1, 2);";
+		String borrarAsignaturas = "DELETE FROM asignatura WHERE codigo in (1, 2, 3, 4, 5, 6, 7, 8);";
+		
+		Conn.executeIDU(borrarAsignaturas);
+		Conn.executeIDU(borrarAlumnos);
+	}
+
+	private static void insertarDatos() throws SQLException, IOException {
 		String datosAlumno1 = "INSERT INTO alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
 							+ "VALUES (1, 'Antonio', 'password123', '2001-08-21', 9.8, 'iconAntonio.jpg');";
 		String datosAlumno2 = "INSERT INTO alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
