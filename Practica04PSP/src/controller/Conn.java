@@ -1,9 +1,6 @@
 package controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import db.Database;
 
@@ -53,6 +50,25 @@ public class Conn {
     public static ResultSet executeQuery(String sql) throws SQLException {
         return (conn == null) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeQuery(sql);
     }
-    
 
+    public static ResultSet executeSTQuery (String sql, Object...param) throws SQLException{
+        PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        int index = 1;
+        for(Object o : param) {
+            pstmt.setObject(index++, o);
+        }
+        return pstmt.executeQuery();
+    }
+
+    public static int executeSTIDU(String sql, Object...param) throws SQLException{
+        PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        int index = 1 ;
+        int filasAff=0;
+        for(Object o : param) {
+            pstmt.setObject(index++, o);
+            filasAff++;
+        }
+        pstmt.executeUpdate();
+        return filasAff;
+    }
 }

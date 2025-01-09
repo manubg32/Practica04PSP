@@ -15,25 +15,24 @@ public class Main {
 
     public static void main (String[]args) throws IOException {
 
-    	
-    	
         try{
             conn = Conn.open();
             crearTablas();
             borrarDatos();
             insertarDatos();
             System.out.println("Creado con exito");
-            Conn.close();
+			try {
+				new FrmMenuPrincipal();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }catch(SQLException e){
             System.out.println(e);
-        } finally {
-        	
         }
-        try {
-            new FrmMenuPrincipal();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
+
     }
 
     private static void borrarDatos() throws SQLException {
