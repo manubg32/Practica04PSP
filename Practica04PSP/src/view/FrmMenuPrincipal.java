@@ -197,18 +197,22 @@ public class FrmMenuPrincipal extends JFrame {
         //Menu item invisibles para hacer mas pequeño el acerca de
         mniInvisible = new JMenuItem();
         mniInvisible.setHorizontalAlignment(SwingConstants.CENTER);
+        mniInvisible.setEnabled(false);
         menuBar.add(mniInvisible);
 
         mniInvisible2 = new JMenuItem();
         mniInvisible2.setHorizontalAlignment(SwingConstants.CENTER);
+        mniInvisible2.setEnabled(false);
         menuBar.add(mniInvisible2);
 
         mniInvisible3 = new JMenuItem();
         mniInvisible3.setHorizontalAlignment(SwingConstants.CENTER);
+        mniInvisible3.setEnabled(false);
         menuBar.add(mniInvisible3);
 
         mniInvisible4 = new JMenuItem();
         mniInvisible4.setHorizontalAlignment(SwingConstants.CENTER);
+        mniInvisible4.setEnabled(false);
         menuBar.add(mniInvisible4);
 
         //Panel por defecto
