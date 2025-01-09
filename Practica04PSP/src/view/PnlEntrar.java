@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controller.Conn;
+import controller.CtrlEntrar;
 import db.Database;
 
 public class PnlEntrar extends JPanel {
@@ -25,6 +26,9 @@ public class PnlEntrar extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private CtrlEntrar ce = new CtrlEntrar();
+	
 	public static String user;
 	public static Integer idAlumn; 
 	
@@ -53,12 +57,20 @@ public class PnlEntrar extends JPanel {
 				btnValidar.addActionListener(new ActionListener()  {
 					public void actionPerformed(ActionEvent e) {
 						//TODO proceso de validacion
+						String usuario = txtUsuario.getText();
+						char[] pass = txtPassword.getPassword();//La contraseña se coge en un array de caracteres de un JPasswordField
+						
+						if (ce.validarCredenciales(usuario, pass)) {
+					        System.out.println("Inicio de sesión exitoso");
+					    } else {
+					        System.out.println("Credenciales inválidas");
+					    }
 						
 						//Hay que validar el usuario para evitar un SQLInjection
 						
 						//Tras validar al usuario y que sea correcto guardamos su usuario y numero en una variable global para realizar las consultas
-						user = txtUsuario.getText();
-						idAlumn = getAlumnNumber();
+						//user = txtUsuario.getText();
+						//idAlumn = getAlumnNumber();
 						
 					}
 

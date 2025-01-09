@@ -48,7 +48,7 @@ public class Main {
 		String datosAlumno1 = "INSERT INTO alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
 							+ "VALUES (1, 'Antonio', 'password123', '2001-08-21', 9.8, 'iconAntonio.jpg');";
 		String datosAlumno2 = "INSERT INTO alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
-							+ "VALUES(2, 'Manuel', 'contasena123', '2002-09-26', 8.76, 'iconManuel.png');";
+							+ "VALUES(2, 'Manuel', 'contrasena123', '2002-09-26', 8.76, 'iconManuel.png');";
 		
 		Conn.executeIDU(datosAlumno1);
 		Conn.executeIDU(datosAlumno2);
