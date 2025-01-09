@@ -37,9 +37,9 @@ public class Main {
 
     private static void insertarDatos() throws SQLException, IOException {
 		String datosAlumno1 = "INSERT INTO alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
-							+ "VALUES (1, 'Antonio', 'password123', '2001-08-21', 9.8, " + Database.getImageBytes("iconAntonio.jpg") + ");";
+							+ "VALUES (1, 'Antonio', 'password123', '2001-08-21', 9.8, 'iconAntonio.jpg');";
 		String datosAlumno2 = "INSERT INTO alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
-							+ "VALUES(2, 'Manuel', 'contasena123', '2002-09-26', 8.76, " + Database.getImageBytes("iconManuel.png") + ");";
+							+ "VALUES(2, 'Manuel', 'contasena123', '2002-09-26', 8.76, 'iconManuel.png');";
 		
 		Conn.executeIDU(datosAlumno1);
 		Conn.executeIDU(datosAlumno2);
@@ -79,7 +79,7 @@ public class Main {
                 + "contrasena VARCHAR(255) NOT NULL, "
                 + "fecha_nacimiento DATE NOT NULL, "
                 + "nota_media FLOAT NOT NULL, "
-                + "imagen BLOB)";
+                + "imagen VARCHAR(255))";
         String crearTablaAsignatura = "CREATE TABLE IF NOT EXISTS Asignatura ("
                 + "codigo INT PRIMARY KEY, "
                 + "nombre VARCHAR(255) NOT NULL, "

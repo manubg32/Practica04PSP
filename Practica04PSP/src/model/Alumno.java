@@ -9,9 +9,9 @@ public class Alumno {
     private String password;
     private Calendar birthday;
     private Double avg;
-    private Integer idFoto;
+    private String idFoto;
 
-    public Alumno(Integer num, String user, String password, Calendar birthday, Double avg, Integer idFoto) {
+    public Alumno(Integer num, String user, String password, Calendar birthday, Double avg, String idFoto) {
         this.id = num; //PK
         this.user = user;
         this.password = password;
@@ -60,11 +60,11 @@ public class Alumno {
         this.avg = avg;
     }
 
-    public Integer getIdFoto() {
+    public String getIdFoto() {
         return idFoto;
     }
 
-    public void setIdFoto(Integer idFoto) {
+    public void setIdFoto(String idFoto) {
         this.idFoto = idFoto;
     }
 }
