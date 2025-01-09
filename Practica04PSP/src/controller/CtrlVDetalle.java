@@ -38,9 +38,8 @@ public class CtrlVDetalle {
             // Abrimos la conexión
             Conn.open();
             // Devolvemos un RS con todas las asignaturas
-            return Database.executeQuery("SELECT * FROM Asignatura "
-                                       + "WHERE aluNumero = (SELECT numero FROM Alumno "
-                                       + "WHERE usuario = '" + PnlEntrar.user + "');");
+            return Conn.executeQuery("SELECT * FROM asignatura "
+                                       + "WHERE aluNumero = " + PnlEntrar.idAlumn );
         } catch (SQLException e) {
             // Si hay algún error se le indica al usuario a través de un JOptionPane
             JOptionPane.showMessageDialog(null, "No existen asignaturas para mostrar");
