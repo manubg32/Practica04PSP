@@ -1,5 +1,7 @@
 package view;
 
+import controller.CtrlSalir;
+
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -85,8 +87,10 @@ public class FrmMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//TODO cortar la conexion e indicar al usuario que se ha desconectado
                 setTitle("I.E.S El Majuelo - Menu Principal");
-                setContentPane(new PnlSalir());
+                setContentPane(contentPane);
                 JOptionPane.showMessageDialog(null, "Se ha cerrado la sesión.", "Cerrar Sesión", JOptionPane.INFORMATION_MESSAGE);
+                CtrlSalir.logout();
+                desactivarBotones();
                 revalidate();
                 repaint();
 			}
@@ -226,6 +230,10 @@ public class FrmMenuPrincipal extends JFrame {
 		mnuVisualizar.setEnabled(true);
 		mniSalir.setEnabled(true);
 	}
+    public static void desactivarBotones(){
+        mnuVisualizar.setEnabled(false);
+        mniSalir.setEnabled(false);
+    }
 
 	
 }
