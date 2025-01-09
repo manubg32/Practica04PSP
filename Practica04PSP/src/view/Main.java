@@ -18,6 +18,7 @@ public class Main {
         try{
             conn = Conn.open();
             crearTablas();
+            insertarDatos();
             System.out.println("Creado con exito");
             Conn.close();
         }catch(SQLException e){
@@ -32,7 +33,43 @@ public class Main {
         }
     }
 
-    //Este metodo es por si no tenemos tablas creadas las crea
+    private static void insertarDatos() throws SQLException {
+		String datosAlumno1 = "INSERT INTO Alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
+							+ "VALUES (1, 'Antonio', 'password123', 2001-08-21, 9.8, );";
+		String datosAlumno2 = "INSERT INTO Alumno(numero, usuario, contrasena, fecha_nacimiento, nota_media, imagen)"
+							+ "INSERT INTO Alumno(2, 'Manuel', 'contasena123', 2002-09-26, 8.76, );";
+		
+		Database.executeIDU(datosAlumno1);
+		Database.executeIDU(datosAlumno2);
+		
+		String datosAsignatura1 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
+								+ "VALUES (1, 'Matemáticas', 7.6, 1);";	
+		String datosAsignatura2 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
+								+ "VALUES (2, 'Matemáticas', 8.75, 2);";
+		String datosAsignatura3 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
+								+ "VALUES (3, 'Física', 5.6, 1);";	
+		String datosAsignatura4 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
+								+ "VALUES (4, 'Biología', 4.95, 2);";	
+		String datosAsignatura5 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
+								+ "VALUES (5, 'Plástica', 3.75, 1);";	
+		String datosAsignatura6 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
+								+ "VALUES (6, 'Conocimiento del Medio', 7.02, 2);";
+		String datosAsignatura7 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
+								+ "VALUES (7, 'Lengua', 5.0, 1);";	
+		String datosAsignatura8 = "INSERT INTO Asignatura(codigo, nombre, nota, aluNumero)"
+								+ "VALUES (8, 'Inglés', 10.0, 2);";
+		
+		Database.executeIDU(datosAsignatura1);
+		Database.executeIDU(datosAsignatura2);
+		Database.executeIDU(datosAsignatura3);
+		Database.executeIDU(datosAsignatura4);
+		Database.executeIDU(datosAsignatura5);
+		Database.executeIDU(datosAsignatura6);
+		Database.executeIDU(datosAsignatura7);
+		Database.executeIDU(datosAsignatura8);
+	}
+
+	//Este metodo es por si no tenemos tablas creadas las crea
     private static void crearTablas() throws SQLException {
         String crearTablaAlumno = "CREATE TABLE IF NOT EXISTS Alumno ("
                 + "numero INT PRIMARY KEY, "
