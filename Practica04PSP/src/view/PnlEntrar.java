@@ -21,6 +21,10 @@ import db.Database;
 
 public class PnlEntrar extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static String user;
 	public static Integer idAlumn; 
 	
@@ -63,12 +67,11 @@ public class PnlEntrar extends JPanel {
 						try {
 							Conn.open();
 							ResultSet rs = Database.executeQuery("SELECT numero FROM Alumno WHERE usuario = '" + user + "');");
+							Conn.close();
 							return rs.getInt("numero");
 						} catch (SQLException e) {
 							JOptionPane.showMessageDialog(btnValidar, e.getMessage());
 							return 0;
-						} finally {
-							Conn.close();
 						}
 					}
 				});

@@ -47,7 +47,11 @@ public class ControllerVDetalles {
             return null;
         } finally {
             // Cerramos la conexión
-            Conn.close();
+            try {
+            	Conn.close();
+            } catch(SQLException ignore) {
+            	
+            }
         }
     }
 
@@ -142,7 +146,9 @@ public class ControllerVDetalles {
 			JOptionPane.showMessageDialog(null, "No existen asignaturas para mostrar");
 		} finally {
 			//Cerramos la conexión
-			Conn.close();
+			try {
+				Conn.close();
+			}  catch (SQLException ignore) {}
 		}
 		
 	}

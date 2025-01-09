@@ -18,12 +18,19 @@ public class Database {
         user = "root"; //Declaramos el usuario
         pass = ""; //Declaramos la contraseña
     }
+   
+    
     public static Connection openConn() throws SQLException {
         if(conn == null) {
             new Database();
         }
         return conn = DriverManager.getConnection(url,user,pass);
     }
+    
+    
+    
+    
+    ///////////////////////////
     public static void closeConn() throws SQLException{
         if(conn!=null) {
             conn.close();
@@ -50,9 +57,11 @@ public class Database {
     public static int executeIDU(String sql) throws SQLException {
         return (conn == null) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeUpdate(sql);
     }
-    public static boolean executeCreate(String sql) throws SQLException{
+    
+    public static boolean executeCreate(String sql, Connection conn) throws SQLException{
         return (conn == null ) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).execute(sql);
     }
+    
     public static ResultSet executeSTQuery (String sql, Object...param) throws SQLException{
         PreparedStatement pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         int index = 1;

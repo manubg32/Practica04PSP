@@ -9,25 +9,22 @@ import java.sql.SQLException;
 
 public class Main {
 
+	static Connection conn = null;
 
+    public static void main (String[]args) {
 
-    public static void main (String[]args){
-/*
-        Connection bd = Conn.open();
-
-        System.out.println("Realizamos las consultas");
-
-        Conn.close();
-
+    	
+    	
         try{
-            Database.openConn();
+            conn = Conn.open();
             crearTablas();
             System.out.println("Creado con exito");
-            Database.closeConn();
+            Conn.close();
         }catch(SQLException e){
             System.out.println(e);
+        } finally {
+        	
         }
-*/
         try {
             new FrmMenuPrincipal();
         } catch (Exception e) {
@@ -51,7 +48,7 @@ public class Main {
                 + "aluNumero INT, "
                 + "FOREIGN KEY (aluNumero) REFERENCES Alumno(numero))";
 
-        Database.executeCreate(crearTablaAlumno);
-        Database.executeCreate(crearTablaAsignatura);
+        Database.executeCreate(crearTablaAlumno, conn);
+        Database.executeCreate(crearTablaAsignatura, conn);
     }
 }

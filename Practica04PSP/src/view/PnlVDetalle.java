@@ -23,7 +23,7 @@ public class PnlVDetalle extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private ControllerVDetalles cv = new ControllerVDetalles();
+	private ControllerVDetalles cd = new ControllerVDetalles();
 	
 	public static JTextField txtNota;
 	
@@ -47,7 +47,7 @@ public class PnlVDetalle extends JPanel {
 		addListeners();
 		
 		//Mostramos el primer elemento
-		cv.mostrarPrimero();
+		cd.mostrarPrimero();
 	}
 
 	
@@ -56,35 +56,35 @@ public class PnlVDetalle extends JPanel {
 		//Damos funcionalidad al btnPrimero
 		btnPrimero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cv.mostrarPrimero();
+				cd.mostrarPrimero();
 			}
 		});
 		
 		//Damos funcionalidad al btnUltimo
 		btnUltimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cv.mostrarUltimo();
+				cd.mostrarUltimo();
 			}
 		});
 		
 		//Damos funcionalidad al btnSiguiente
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cv.mostrarSiguiente();
+				cd.mostrarSiguiente();
 			}
 		});
 		
 		//Damos funcionalidad al btnAnterior
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cv.mostrarAnterior();
+				cd.mostrarAnterior();
 			}
 		});
 		
 		//Damos funcionalidad al btnGuardar
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cv.guardarNota();
+				cd.guardarNota();
 			}
 		});
 	}
