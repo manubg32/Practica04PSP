@@ -29,7 +29,7 @@ public class FrmMenuPrincipal extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
+	static JPanel contentPane;
     
     private FrmMenuPrincipal context = this;
 
@@ -38,7 +38,7 @@ public class FrmMenuPrincipal extends JFrame {
     private JMenu mnuValidar;
     private JMenuItem mniVDetalle;
     private JMenuItem mniVResumen;
-    private JMenuItem mniEntrar;
+    private static JMenuItem mniEntrar;
     private static JMenuItem mniSalir;
 
     private JMenuItem mniInvisible;
@@ -233,11 +233,14 @@ public class FrmMenuPrincipal extends JFrame {
 	public static void activarBotones() {
 		mnuVisualizar.setEnabled(true);
 		mniSalir.setEnabled(true);
+		mniEntrar.setEnabled(false);
 	}
     public static void desactivarBotones(){
         mnuVisualizar.setEnabled(false);
         mniSalir.setEnabled(false);
+        mniEntrar.setEnabled(true);
     }
+
 
 	
 }

@@ -18,40 +18,31 @@ public class CtrlVDetalle {
     private int pos = 0;
 
     public CtrlVDetalle() {
-        try {
             // Obtenemos el ResultSet y convertimos los resultados en una lista de Asignaturas
-            ResultSet rs = obtenerAsignaturas();
-            if (rs != null) {
-                asignaturas = conversion(rs);
-            } else {
-                asignaturas = new ArrayList<>();
-            }
-        } catch (SQLException e) {
-            // Manejo de errores
-            JOptionPane.showMessageDialog(null, "Error al cargar las asignaturas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            asignaturas = new ArrayList<>();
-        }
+            asignaturas = obtenerAsignaturas(PnlEntrar.idAlumn);
     }
 
-    private ResultSet obtenerAsignaturas() {
-        try {
-            // Abrimos la conexión
-            Conn.open();
-            // Devolvemos un RS con todas las asignaturas
-            return Conn.executeQuery("SELECT * FROM asignatura "
-                                       + "WHERE aluNumero = " + PnlEntrar.idAlumn );
-        } catch (SQLException e) {
-            // Si hay algún error se le indica al usuario a través de un JOptionPane
-            JOptionPane.showMessageDialog(null, "No existen asignaturas para mostrar");
-            return null;
-        } finally {
-            // Cerramos la conexión
-            try {
-            	Conn.close();
-            } catch(SQLException ignore) {
-            	
+    public List<Asignatura> obtenerAsignaturas(int id){
+        String sql = "SELECT * FROM asignatura WHERE aluNumero = ?";
+
+        List<Asignatura> asignaturas = new ArrayList<>();
+
+        try{
+        	Conn.open();
+            ResultSet rs = Conn.executeSTQuery(sql, id);
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                Double nota = rs.getDouble("nota");
+                Integer idAlumn = rs.getInt("aluNumero");
+                Asignatura a = new Asignatura(nombre,nota,idAlumn);
+                asignaturas.add(a);
             }
+            Conn.close();
+        }catch (SQLException e){
+            e.printStackTrace();
         }
+        
+        return asignaturas;
     }
 
     private List<Asignatura> conversion(ResultSet rs) throws SQLException {

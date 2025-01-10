@@ -3,22 +3,26 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-import javax.naming.Context;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JCalendar;
+
 import controller.CtrlVResumen;
 import model.Alumno;
-import model.Asignatura;
 
 public class PnlVResumen extends JPanel {
 
@@ -137,7 +141,11 @@ public class PnlVResumen extends JPanel {
 
 		String ruta = a.getIdFoto();
 		ImageIcon icon = new ImageIcon(ruta);
-		lblFoto = new JLabel(icon);
+		Image image = icon.getImage();
+		Image scaledImage = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		
+		lblFoto = new JLabel(scaledIcon);
 		add(lblFoto, BorderLayout.WEST);
 
 		panel = new JPanel();

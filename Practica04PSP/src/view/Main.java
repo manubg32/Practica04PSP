@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class Main {
 
 	static Connection conn = null;
+	public static FrmMenuPrincipal mnu;
 
     public static void main (String[]args) throws IOException {
 
@@ -22,7 +23,7 @@ public class Main {
             insertarDatos();
             System.out.println("Creado con exito");
 			try {
-				new FrmMenuPrincipal();
+				mnu = new FrmMenuPrincipal();
 
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,10 +21,10 @@ import javax.swing.SwingConstants;
 
 import controller.Conn;
 import controller.CtrlEntrar;
-import db.Database;
 
 public class PnlEntrar extends JPanel {
 
+	
 	/**
 	 * 
 	 */
@@ -72,6 +73,9 @@ public class PnlEntrar extends JPanel {
 								idAlumn = getAlumnNumber(user);
 							} catch (SQLException ignore) {}
 			                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+			                txtUsuario.setText("");
+			                txtPassword.setText("");
+							Main.mnu.setContentPane(FrmMenuPrincipal.contentPane);
 					    } else {
 					    	Arrays.fill(pass, '\0'); //Para eliminar la contraseña y no se guarde
 			                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
