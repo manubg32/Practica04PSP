@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.*;
 
-import db.Database;
 
 /**
  * Clase que gestiona la conexion con la BD en MySQL
@@ -70,5 +69,9 @@ public class Conn {
         }
         pstmt.executeUpdate();
         return filasAff;
+    }
+
+    public static boolean executeCreate(String sql) throws SQLException{
+        return (conn == null ) ? null : conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).execute(sql);
     }
 }

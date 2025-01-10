@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import db.Database;
 import model.Asignatura;
 import view.PnlEntrar;
 import view.PnlVDetalle;
@@ -42,9 +41,8 @@ public class CtrlVDetalle {
 			}
 			Conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ha habido un error al obtener las asignaturas", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-
 		return asignaturas;
 	}
 
@@ -151,7 +149,9 @@ public class CtrlVDetalle {
 			// Cerramos la conexión
 			try {
 				Conn.close();
-			} catch (SQLException ignore) {}
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Ha habido un error al cerrar la conexion con la DB. ", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
 	}

@@ -135,7 +135,7 @@ public class CtrlVResumen {
                 Conn.executeSTIDU(sql,fecha,id);
                 fecha_final = fecha_nac.getTime();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error: "+e, "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             String sql = "SELECT fecha_nacimiento FROM alumno WHERE numero = ?";
@@ -145,7 +145,7 @@ public class CtrlVResumen {
                     fecha_final = rs.getDate("fecha_nacimiento");
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error: "+e, "Error", JOptionPane.ERROR_MESSAGE);
             }
             JOptionPane.showMessageDialog(null, "El año de nacimiento no es válido (Año maximo 2022).");
 

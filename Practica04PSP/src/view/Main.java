@@ -1,7 +1,6 @@
 package view;
 
 import controller.Conn;
-import db.Database;
 
 import javax.xml.crypto.Data;
 
@@ -95,8 +94,7 @@ public class Main {
                 + "nota FLOAT NOT NULL, "
                 + "aluNumero INT, "
                 + "FOREIGN KEY (aluNumero) REFERENCES Alumno(numero))";
-
-        Database.executeCreate(crearTablaAlumno, conn);
-        Database.executeCreate(crearTablaAsignatura, conn);
+		Conn.executeCreate(crearTablaAlumno);
+		Conn.executeCreate(crearTablaAsignatura);
     }
 }
