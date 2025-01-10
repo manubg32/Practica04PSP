@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import controller.CtrlVDetalle;
 
@@ -22,6 +24,8 @@ public class PnlVDetalle extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private String nota;
 
 	private CtrlVDetalle cd = new CtrlVDetalle();
 	
@@ -48,15 +52,32 @@ public class PnlVDetalle extends JPanel {
 		
 		//Mostramos el primer elemento
 		cd.mostrarPrimero();
+		nota = txtNota.getText();
 	}
 
 	
 
 	private void addListeners() {
+		
+		//Si hay un cambio en el txtNota activamos el btnGuardar
+		txtNota.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				btnGuardar.setEnabled(true);
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {}});
+		
 		//Damos funcionalidad al btnPrimero
 		btnPrimero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cd.mostrarPrimero();
+				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo);
+				nota = txtNota.getText();
 			}
 		});
 		
@@ -64,6 +85,8 @@ public class PnlVDetalle extends JPanel {
 		btnUltimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cd.mostrarUltimo();
+				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo);
+				nota = txtNota.getText();
 			}
 		});
 		
@@ -71,6 +94,8 @@ public class PnlVDetalle extends JPanel {
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cd.mostrarSiguiente();
+				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo);
+				nota = txtNota.getText();
 			}
 		});
 		
@@ -78,13 +103,15 @@ public class PnlVDetalle extends JPanel {
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cd.mostrarAnterior();
+				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo);
+				nota = txtNota.getText();
 			}
 		});
 		
 		//Damos funcionalidad al btnGuardar
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cd.guardarNota();
+				cd.guardarNota(nota, txtNota);
 			}
 		});
 	}
@@ -120,6 +147,7 @@ public class PnlVDetalle extends JPanel {
 		
 		btnGuardar = new JButton("Guardar");
 		pnlBotones.add(btnGuardar);
+		btnGuardar.setEnabled(false);
 		
 		btnSiguiente = new JButton("Siguiente");
 		pnlBotones.add(btnSiguiente);
