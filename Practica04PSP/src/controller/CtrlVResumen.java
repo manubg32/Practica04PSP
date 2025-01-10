@@ -14,10 +14,10 @@ import java.util.Date;
 import java.util.List;
 
 public class CtrlVResumen {
-    public CtrlVResumen(){
+    public CtrlVResumen(){ }
 
-    }
 
+    // Metodo para obtener el alumno logeado mediante su id
     public Alumno obtenerAlumno(int id) {
         String sql = "SELECT * FROM alumno WHERE numero = ?";
         ResultSet rs = null;
@@ -58,6 +58,8 @@ public class CtrlVResumen {
 
         return new Alumno(id,usuario,contrasena,fecha ,nota_media,imagen);
     }
+
+    // Metodo para obtener la lista de todas las asignaturas del alumno logeado
     public List<Asignatura> obtenerAsignaturas(int id){
         String sql = "SELECT * FROM asignatura WHERE aluNumero = ?";
 
@@ -77,6 +79,8 @@ public class CtrlVResumen {
         }
         return asignaturas;
     }
+
+    // Metodo para calcular la nota media de todas las asignaturas.
     public Double notaMedia(int id) {
         Double notaMedia = 0.0;
         Alumno a = obtenerAlumno(id);
@@ -119,5 +123,33 @@ public class CtrlVResumen {
         return notaMedia;
     }
 
+    // Metodo para actualizar la fecha en la base de datos
+    public Date updateFecha(Date fecha, Integer id){
+        Date fecha_final = new Date();
+        Calendar fecha_nac = Calendar.getInstance();
+        fecha_nac.setTime(fecha);
+        Integer anio = fecha_nac.get(Calendar.YEAR);
+        if(anio<=2022){
+            String sql = "UPDATE alumno SET fecha_nacimiento = ? WHERE numero = ?";
+            try {
+                Conn.executeSTIDU(sql,fecha,id);
+                fecha_final = fecha_nac.getTime();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            String sql = "SELECT fecha_nacimiento FROM alumno WHERE numero = ?";
+            try {
+                ResultSet rs = Conn.executeSTQuery(sql,id);
+                while(rs.next()){
+                    fecha_final = rs.getDate("fecha_nacimiento");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            JOptionPane.showMessageDialog(null, "El año de nacimiento no es válido (Año maximo 2022).");
 
+        }
+        return fecha_final;
+    }
 }

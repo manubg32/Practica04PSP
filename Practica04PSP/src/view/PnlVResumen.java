@@ -1,28 +1,21 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import com.toedter.calendar.JCalendar;
 
 import controller.CtrlVResumen;
 import model.Alumno;
+import model.Asignatura;
 
 public class PnlVResumen extends JPanel {
 
@@ -116,11 +109,10 @@ public class PnlVResumen extends JPanel {
 
 					//Le damos formato
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-					String fd = df.format(seleccionada);
+					String fd = df.format(ctrlResumen.updateFecha(seleccionada, PnlEntrar.idAlumn));
 
 					//Y se la ponemos como texto al Label
 					lblFechaNacimientoMostrada.setText(fd);
-
 					dialog.dispose();
 				});
 
@@ -177,9 +169,11 @@ public class PnlVResumen extends JPanel {
 		panel.add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
+		// Formato para mostrar la fecha.
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date fechaDate = a.getBirthday().getTime();
 		String fechaFormateada = df.format(fechaDate);
+
 		lblFechaNacimientoMostrada = new JLabel(fechaFormateada);
 		panel_1.add(lblFechaNacimientoMostrada);
 
@@ -199,12 +193,22 @@ public class PnlVResumen extends JPanel {
 		btnNotaMedia = new JButton("Calcular Nota Media");
 		panel_2.add(btnNotaMedia);
 
-		list = new JList();
-		add(list, BorderLayout.EAST);
+		// Creamos la lista para el JList y añadimos las asignaturas del alumno.
+		DefaultListModel listModel = new DefaultListModel();
+		List<Asignatura> listaAS = ctrlResumen.obtenerAsignaturas(PnlEntrar.idAlumn);
+		for (Asignatura asignatura : listaAS) {
+			listModel.addElement(asignatura);
+		}
+
+		JList<Asignatura> list = new JList<>(listModel);
+		JScrollPane scrollPane = new JScrollPane(list);
+
+		add(scrollPane, BorderLayout.EAST);
 
 
 	}
 
+	// Este metodo es para colocar asteriscos dependiendo de cuantos caracteres tenga la contraseña
 	private String getStringAsteriscos(String password){
 		String asteriscos = "";
 		for(int i=0; i<password.length(); i++){

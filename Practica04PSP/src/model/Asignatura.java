@@ -47,4 +47,9 @@ public class Asignatura
     public void setIdAlumn(Integer idAlumn) {
         this.idAlumn = idAlumn;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre: "+nombre+"\n Nota:"+nota;
+    }
 }
