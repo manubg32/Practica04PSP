@@ -53,6 +53,7 @@ public class PnlVDetalle extends JPanel {
 		//Mostramos el primer elemento
 		cd.mostrarPrimero();
 		nota = txtNota.getText();
+		cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo, btnGuardar);
 	}
 
 	
@@ -76,7 +77,7 @@ public class PnlVDetalle extends JPanel {
 		btnPrimero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cd.mostrarPrimero();
-				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo);
+				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo, btnGuardar);
 				nota = txtNota.getText();
 			}
 		});
@@ -85,7 +86,7 @@ public class PnlVDetalle extends JPanel {
 		btnUltimo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cd.mostrarUltimo();
-				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo);
+				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo, btnGuardar);
 				nota = txtNota.getText();
 			}
 		});
@@ -94,7 +95,7 @@ public class PnlVDetalle extends JPanel {
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cd.mostrarSiguiente();
-				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo);
+				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo, btnGuardar);
 				nota = txtNota.getText();
 			}
 		});
@@ -103,7 +104,7 @@ public class PnlVDetalle extends JPanel {
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cd.mostrarAnterior();
-				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo);
+				cd.comprobarBotonesVista(btnPrimero, btnAnterior, btnSiguiente, btnUltimo, btnGuardar);
 				nota = txtNota.getText();
 			}
 		});

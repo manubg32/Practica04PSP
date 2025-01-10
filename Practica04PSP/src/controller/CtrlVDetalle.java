@@ -158,7 +158,7 @@ public class CtrlVDetalle {
 
 	// Comprobamos los botones de la vista
 	public void comprobarBotonesVista(JButton btnPrimero, JButton btnAnterior, JButton btnSiguiente,
-			JButton btnUltimo) {
+			JButton btnUltimo, JButton btnGuardar) {
 
 		// Si la posicion es mayor o igual al tamaño de la lista, el boton de siguiente
 		// y ultimo se desactivan
@@ -180,6 +180,9 @@ public class CtrlVDetalle {
 			btnAnterior.setEnabled(true);
 			btnPrimero.setEnabled(true);
 		}
+		
+		//Desactivamos el btnGuardar
+		btnGuardar.setEnabled(false);
 
 	}
 

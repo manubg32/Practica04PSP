@@ -50,6 +50,6 @@ public class Asignatura
 
     @Override
     public String toString() {
-        return "Nombre: "+nombre+"\n Nota:"+nota;
+        return nombre+": "+nota;
     }
 }

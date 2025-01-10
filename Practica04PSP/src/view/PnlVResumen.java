@@ -190,7 +190,7 @@ public class PnlVResumen extends JPanel {
 		lblNotaMediaMostrada.setVisible(false);
 		panel_2.add(lblNotaMediaMostrada);
 
-		btnNotaMedia = new JButton("Calcular Nota Media");
+		btnNotaMedia = new JButton("Calcular");
 		panel_2.add(btnNotaMedia);
 
 		// Creamos la lista para el JList y añadimos las asignaturas del alumno.
@@ -202,6 +202,7 @@ public class PnlVResumen extends JPanel {
 
 		JList<Asignatura> list = new JList<>(listModel);
 		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setPreferredSize(new Dimension(200,50));
 
 		add(scrollPane, BorderLayout.EAST);
 
